@@ -1,0 +1,98 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.h
+  * @brief          : Header for main.c file.
+  *                   This file contains the common defines of the application.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __MAIN_H
+#define __MAIN_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32u5xx_hal.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include "secrets.h"
+#include "stm32u5xx.h"
+#include "stdio.h"
+#include "driver/include/m2m_types.h"
+/* USER CODE END Includes */
+
+/* Exported types ------------------------------------------------------------*/
+/* USER CODE BEGIN ET */
+#define USARTx                           USART1
+#define USARTx_CLK_ENABLE()              __HAL_RCC_USART1_CLK_ENABLE();
+#define USARTx_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USARTx_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+
+#define USARTx_FORCE_RESET()             __HAL_RCC_USART1_FORCE_RESET()
+#define USARTx_RELEASE_RESET()           __HAL_RCC_USART1_RELEASE_RESET()
+
+/* Definition for USARTx Pins */
+#define USARTx_TX_PIN                    GPIO_PIN_9
+#define USARTx_TX_GPIO_PORT              GPIOA
+#define USARTx_TX_AF                     GPIO_AF7_USART1
+#define USARTx_RX_PIN                    GPIO_PIN_10
+#define USARTx_RX_GPIO_PORT              GPIOA
+#define USARTx_RX_AF                     GPIO_AF7_USART1
+/* USER CODE END ET */
+
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
+
+/* USER CODE END EC */
+
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
+/** Wi-Fi Settings */
+/** Security mode */
+#define USE_WPA_PSK		 (1) /*< Set to (1) to use WEP, and (0) to use OPEN */
+
+/** AP mode Settings */
+#define MAIN_WLAN_SSID           "chewie-5G" /* < SSID */
+#if USE_WPA_PSK
+#define MAIN_WLAN_AUTH           M2M_WIFI_SEC_WPA_PSK /* < Security manner */
+#define MAIN_WLAN_WPA_PSK_KEY        WIFI_PASS /* < Security Key in WPA_PSK Mode */
+#else
+#define MAIN_WLAN_AUTH           M2M_WIFI_SEC_OPEN /* < Security manner */
+#endif
+#define MAIN_WLAN_CHANNEL        (6) /* < Channel number */
+/* USER CODE END EM */
+
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
+
+/* USER CODE BEGIN EFP */
+
+/* USER CODE END EFP */
+
+/* Private defines -----------------------------------------------------------*/
+
+/* USER CODE BEGIN Private defines */
+
+/* USER CODE END Private defines */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __MAIN_H */
