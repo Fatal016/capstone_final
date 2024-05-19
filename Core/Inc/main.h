@@ -86,6 +86,20 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define WIFI_SCK_Pin GPIO_PIN_5
+#define WIFI_SCK_GPIO_Port GPIOA
+#define WIFI_MISO_Pin GPIO_PIN_6
+#define WIFI_MISO_GPIO_Port GPIOA
+#define WIFI_MOSI_Pin GPIO_PIN_7
+#define WIFI_MOSI_GPIO_Port GPIOA
+#define WIFI_CHIP_ENABLE_Pin GPIO_PIN_13
+#define WIFI_CHIP_ENABLE_GPIO_Port GPIOB
+#define WIFI_RESET_Pin GPIO_PIN_11
+#define WIFI_RESET_GPIO_Port GPIOD
+#define WIFI_INTERRUPT_Pin GPIO_PIN_12
+#define WIFI_INTERRUPT_GPIO_Port GPIOD
+#define WIFI_WAKE_Pin GPIO_PIN_6
+#define WIFI_WAKE_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
 

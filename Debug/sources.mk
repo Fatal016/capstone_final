@@ -26,4 +26,10 @@ Core/Src \
 Core/Startup \
 Drivers/BSP/STM32U5xx_Nucleo \
 Drivers/STM32U5xx_HAL_Driver/Src \
+winc1500/bsp/source \
+winc1500/bus_wrapper/source \
+winc1500/common/source \
+winc1500/driver/source \
+winc1500/socket/source \
+winc1500/spi_flash/source \
 

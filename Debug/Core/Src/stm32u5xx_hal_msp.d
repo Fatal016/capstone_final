@@ -40,7 +40,9 @@ Core/Src/stm32u5xx_hal_msp.o: ../Core/Src/stm32u5xx_hal_msp.c \
  /home/couriersix/Git/capstone_final/winc1500/common/include/nm_common.h \
  /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp.h \
  /home/couriersix/Git/capstone_final/winc1500/common/include/nm_debug.h \
- /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h
+ /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h \
+ /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_stm32u5a5.h \
+ /home/couriersix/Git/capstone_final/winc1500/config/conf_winc.h
 ../Core/Inc/main.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h:
 ../Core/Inc/stm32u5xx_hal_conf.h:
@@ -84,3 +86,5 @@ Core/Src/stm32u5xx_hal_msp.o: ../Core/Src/stm32u5xx_hal_msp.c \
 /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp.h:
 /home/couriersix/Git/capstone_final/winc1500/common/include/nm_debug.h:
 /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h:
+/home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_stm32u5a5.h:
+/home/couriersix/Git/capstone_final/winc1500/config/conf_winc.h:

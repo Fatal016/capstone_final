@@ -38,7 +38,7 @@
 #ifndef _NM_BSP_INTERNAL_H_
 #define _NM_BSP_INTERNAL_H_
 
-#define
+//#define __STM32U5A5xx__
 
 #ifdef WIN32
 #include "nm_bsp_win32.h"
@@ -112,8 +112,8 @@
 #include "bsp/include/nm_bsp_arduino_uno.h"
 #endif
 
-#ifdef __STM32U5A5xx__
+//#ifdef __STM32U5A5xx__
 #include "bsp/include/nm_bsp_stm32u5a5.h"
-#endif
+//#endif
 
 #endif //_NM_BSP_INTERNAL_H_

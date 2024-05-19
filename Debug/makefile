@@ -9,6 +9,12 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include winc1500/spi_flash/source/subdir.mk
+-include winc1500/socket/source/subdir.mk
+-include winc1500/driver/source/subdir.mk
+-include winc1500/common/source/subdir.mk
+-include winc1500/bus_wrapper/source/subdir.mk
+-include winc1500/bsp/source/subdir.mk
 -include Drivers/STM32U5xx_HAL_Driver/Src/subdir.mk
 -include Drivers/BSP/STM32U5xx_Nucleo/subdir.mk
 -include Core/Startup/subdir.mk

@@ -23,10 +23,12 @@
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
 #include <string.h>
+
 //#include <stdint.h>
 
+#include "stm32u5xx_hal_conf.h"
 #include "driver/include/m2m_wifi.h"
-#include "bsp/include/nm_bsp.h"
+#include "bsp/include/nm_bsp_stm32u5a5.h"
 #include "config/conf_winc.h"
 /* USER CODE END Includes */
 
@@ -60,9 +62,10 @@ SPI_HandleTypeDef hspi1;
 
 UART_HandleTypeDef huart4;
 UART_HandleTypeDef huart1;
-UART_HandleTypeDef UartHandle;
 
 /* USER CODE BEGIN PV */
+UART_HandleTypeDef UartHandle;
+
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
    set to 'Yes') calls __io_putchar() */
@@ -73,7 +76,7 @@ UART_HandleTypeDef UartHandle;
 static void SystemClock_Config(void);
 extern void isr(void);
 
-void EXTI15_10_IRQHandler(void)
+void EXTI12_IRQHandler(void)
 {
     uint16_t GPIO_Pin;
 
@@ -112,7 +115,6 @@ static void MX_USART1_UART_Init(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
-
 /* USER CODE BEGIN 0 */
 /**
   * @brief  EXTI line detection callback.
@@ -213,8 +215,7 @@ int main(void)
   __GPIOB_CLK_ENABLE();
 
   /* Initialize the BSP. */
-
-#include "stm32l4xx_hal.h"
+  nm_bsp_init();
 
   /* USER CODE END 2 */
 
@@ -256,12 +257,12 @@ int main(void)
   while(1) {
     m2m_wifi_handle_events(NULL);
   }
-}
-  /* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-  /* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 
   /* USER CODE END 3 */
+}
 
 /**
   * @brief System Clock Configuration
@@ -681,8 +682,45 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(WIFI_CHIP_ENABLE_GPIO_Port, WIFI_CHIP_ENABLE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(WIFI_RESET_GPIO_Port, WIFI_RESET_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(WIFI_WAKE_GPIO_Port, WIFI_WAKE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : WIFI_CHIP_ENABLE_Pin */
+  GPIO_InitStruct.Pin = WIFI_CHIP_ENABLE_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(WIFI_CHIP_ENABLE_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : WIFI_RESET_Pin */
+  GPIO_InitStruct.Pin = WIFI_RESET_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(WIFI_RESET_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : WIFI_INTERRUPT_Pin */
+  GPIO_InitStruct.Pin = WIFI_INTERRUPT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(WIFI_INTERRUPT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : WIFI_WAKE_Pin */
+  GPIO_InitStruct.Pin = WIFI_WAKE_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(WIFI_WAKE_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB7 */
   GPIO_InitStruct.Pin = GPIO_PIN_7;
