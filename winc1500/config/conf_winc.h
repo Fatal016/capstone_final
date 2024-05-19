@@ -102,20 +102,20 @@ extern SPI_HandleTypeDef hspiWifi;
 #   define SPI_WIFI_RELEASE_RESET()             __HAL_RCC_SPI1_RELEASE_RESET()
 
 /* Definition for SPI1 Pins */
-#   define SPI_WIFI_CS_PIN                      GPIO_PIN_14
-#   define SPI_WIFI_CS_GPIO_PORT                GPIOD
-#   define SPI_WIFI_SCK_PIN                     GPIO_PIN_5
-#   define SPI_WIFI_SCK_GPIO_PORT               GPIOA
-#   define SPI_WIFI_MISO_PIN                    GPIO_PIN_6
-#   define SPI_WIFI_MISO_GPIO_PORT              GPIOA
-#   define SPI_WIFI_MOSI_PIN                    GPIO_PIN_7
-#   define SPI_WIFI_MOSI_GPIO_PORT              GPIOA
+#   define SPI_WIFI_CS_PIN                      WIFI_CS_Pin
+#   define SPI_WIFI_CS_GPIO_PORT                WIFI_CS_GPIO_Port
+#   define SPI_WIFI_SCK_PIN                     WIFI_SCK_Pin
+#   define SPI_WIFI_SCK_GPIO_PORT               WIFI_SCK_GPIO_Port
+#   define SPI_WIFI_MISO_PIN                    WIFI_MISO_Pin
+#   define SPI_WIFI_MISO_GPIO_PORT              WIFI_MISO_GPIO_Port
+#   define SPI_WIFI_MOSI_PIN                    WIFI_MOSI_Pin
+#   define SPI_WIFI_MOSI_GPIO_PORT              WIFI_MISO_GPIO_Port
 #   define SPI1_WIFI_AF                         GPIO_AF5_SPI1 /* Sets pins to operate as SPI */
 
 /** WiFi interrupt pin. */
 /* Add WiFi Interrupt pin: ST interrupt pin definition */
-#   define CONF_WINC_SPI_INT_PIN                GPIO_PIN_12
-#	define CONF_WINC_SPI_INT_PORT				GPIOD
+#   define CONF_WINC_SPI_INT_PIN                WIFI_INTERRUPT_Pin
+#	define CONF_WINC_SPI_INT_PORT				WIFI_INTERRUPT_GPIO_Port
 #   define CONF_WINC_EXTI_IRQN                  EXTI12_IRQn
 
 /** SPI clock. */

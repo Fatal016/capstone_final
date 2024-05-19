@@ -199,7 +199,7 @@ void nm_bus_wifi_spi_init(SPI_HandleTypeDef *hspi)
     GPIO_InitStruct.Pull  = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = 0;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init(SPI_WIFI_CS_GPIO_PORT, &GPIO_InitStruct);
     HAL_GPIO_WritePin(SPI_WIFI_CS_GPIO_PORT,SPI_WIFI_CS_PIN,GPIO_PIN_SET);
 
     /**SPIx GPIO Configuration
@@ -268,7 +268,7 @@ sint8 nm_bus_ioctl(uint8 u8Cmd, void* pvParameter)
 	{
 		case NM_BUS_IOCTL_RW: {
 			tstrNmSpiRw *pstrParam = (tstrNmSpiRw *)pvParameter;
-			s8Ret = spi_rw(pstrParam->pu8InBuf, pstrParam->pu8OutBuf, pstrParam->u16Sz);
+			s8Ret = nm_spi_rw(pstrParam->pu8InBuf, pstrParam->pu8OutBuf, pstrParam->u16Sz);
 		}
 		break;
 		default:

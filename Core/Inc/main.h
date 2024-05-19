@@ -98,6 +98,8 @@ void Error_Handler(void);
 #define WIFI_RESET_GPIO_Port GPIOD
 #define WIFI_INTERRUPT_Pin GPIO_PIN_12
 #define WIFI_INTERRUPT_GPIO_Port GPIOD
+#define WIFI_CS_Pin GPIO_PIN_14
+#define WIFI_CS_GPIO_Port GPIOD
 #define WIFI_WAKE_Pin GPIO_PIN_6
 #define WIFI_WAKE_GPIO_Port GPIOC
 

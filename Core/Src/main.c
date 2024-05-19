@@ -690,7 +690,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(WIFI_CHIP_ENABLE_GPIO_Port, WIFI_CHIP_ENABLE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(WIFI_RESET_GPIO_Port, WIFI_RESET_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, WIFI_RESET_Pin|WIFI_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(WIFI_WAKE_GPIO_Port, WIFI_WAKE_Pin, GPIO_PIN_RESET);
@@ -702,12 +702,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(WIFI_CHIP_ENABLE_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : WIFI_RESET_Pin */
-  GPIO_InitStruct.Pin = WIFI_RESET_Pin;
+  /*Configure GPIO pins : WIFI_RESET_Pin WIFI_CS_Pin */
+  GPIO_InitStruct.Pin = WIFI_RESET_Pin|WIFI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(WIFI_RESET_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pin : WIFI_INTERRUPT_Pin */
   GPIO_InitStruct.Pin = WIFI_INTERRUPT_Pin;
