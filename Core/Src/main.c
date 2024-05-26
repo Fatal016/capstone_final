@@ -298,41 +298,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
-/*
-  tstrM2MAPConfig ap_config_base = {
-  	.au8SSID = MAIN_WLAN_SSID,
-  	.u8ListenChannel = M2M_WIFI_CH_ALL,
-	.u8SecType = MAIN_WLAN_AUTH,
-	.u8SsidHide = 0,
-	.au8DHCPServerIP = {192,168,1,1},
-	.au8Key = MAIN_WLAN_WPA_PSK_KEY,
-	.u8KeySz = sizeof(MAIN_WLAN_WPA_PSK_KEY)
-  };
-
-
-  tstrM2MAPConfigExt ap_config_ext = {
-    .au8DefRouterIP = {192,168,1,1},
-	.au8DNSServerIP = {192,168,1,1},
-	.au8SubnetMask = {255,255,255,0}
-  };
-
-  tstrM2MAPModeConfig ap_config = {
-    .strApConfig = ap_config_base,
-	.strApConfigExt = ap_config_ext
-  };
-
-  ret = m2m_validate_ap_parameters(&ap_config);
-*/
-
-//  struct tstrM2MAPModeConfig parameter_verification = {
-//  	.tstrM2MAPConfig = ap_config,
-//  	.tstrM2MAPConfigExt = ap_config_ext
-//  };
-
-
-
-
   memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
 
   /* Initialize Wi-Fi driver with data and status callbacks. */
@@ -351,14 +316,11 @@ int main(void)
 	  printf("main: m2m_wifi_connect call error!(%d)\r\n", ret);
   }
 
+
+
+  //SysTick_Config(SystemCoreClock/1000);
+
   wifi_connected = M2M_WIFI_CONNECTED;
-
-  //ret = m2m_wifi_enable_dhcp(M2M_IP_REQ_ENABLE_DHCP);
-
-
-  //uint8 mac[6] = {0};
-  //ret = m2m_wifi_get_mac_address(mac);
-
 
   while(1) {
 	  m2m_wifi_handle_events(NULL);

@@ -33,15 +33,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_macro  0003df6c  00000000  00000000  00040bc1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_line   0002ab80  00000000  00000000  0007eb2d  2**0
+ 15 .debug_line   0002ab7c  00000000  00000000  0007eb2d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_str    00177fdf  00000000  00000000  000a96ad  2**0
+ 16 .debug_str    00177fdf  00000000  00000000  000a96a9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .comment      00000043  00000000  00000000  0022168c  2**0
+ 17 .comment      00000043  00000000  00000000  00221688  2**0
                   CONTENTS, READONLY
- 18 .debug_frame  00008d24  00000000  00000000  002216d0  2**2
+ 18 .debug_frame  00008d24  00000000  00000000  002216cc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line_str 00000053  00000000  00000000  0022a3f4  2**0
+ 19 .debug_line_str 00000053  00000000  00000000  0022a3f0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -834,10 +834,10 @@ int main(void)
   addr.sin_addr.s_addr = _htonl(MAIN_WIFI_M2M_SERVER_IP);
  80008ba:	4b40      	ldr	r3, [pc, #256]	@ (80009bc <main+0x1f0>)
  80008bc:	613b      	str	r3, [r7, #16]
-//  };
+  /* USER CODE END 2 */
 
-
-
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
 
   memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
  80008be:	f107 031c 	add.w	r3, r7, #28
@@ -896,15 +896,15 @@ int main(void)
  8000926:	4619      	mov	r1, r3
  8000928:	482a      	ldr	r0, [pc, #168]	@ (80009d4 <main+0x208>)
  800092a:	f00d fba7 	bl	800e07c <iprintf>
-  }
+
+
+
+  //SysTick_Config(SystemCoreClock/1000);
 
   wifi_connected = M2M_WIFI_CONNECTED;
  800092e:	4b2a      	ldr	r3, [pc, #168]	@ (80009d8 <main+0x20c>)
  8000930:	2201      	movs	r2, #1
  8000932:	701a      	strb	r2, [r3, #0]
-  //uint8 mac[6] = {0};
-  //ret = m2m_wifi_get_mac_address(mac);
-
 
   while(1) {
 	  m2m_wifi_handle_events(NULL);
