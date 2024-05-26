@@ -33,7 +33,8 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "secrets.h"
 #include "stm32u5xx.h"
-#include "stdio.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "driver/include/m2m_types.h"
 /* USER CODE END Includes */
 
@@ -64,18 +65,15 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 /** Wi-Fi Settings */
-/** Security mode */
-#define USE_WPA_PSK		 (1) /*< Set to (1) to use WEP, and (0) to use OPEN */
+#define MAIN_WLAN_SSID           		"chewie"
+#define MAIN_WLAN_AUTH           		M2M_WIFI_SEC_WPA_PSK
+#define MAIN_WLAN_WPA_PSK_KEY    		WIFI_PASS
+#define MAIN_WIFI_M2M_PRODUCT_NAME 		"Garage Door Sensor"
+#define MAIN_WIFI_M2M_SERVER_IP			0xc0a80113 /* 192.168.1.19 */
+#define MAIN_WIFI_M2M_SERVER_PORT		(4444)
+#define MAIN_WIFI_M2M_REPORT_INTERVAL	(1000)
 
-/** AP mode Settings */
-#define MAIN_WLAN_SSID           "chewie-5G" /* < SSID */
-#if USE_WPA_PSK
-#define MAIN_WLAN_AUTH           M2M_WIFI_SEC_WPA_PSK /* < Security manner */
-#define MAIN_WLAN_WPA_PSK_KEY        WIFI_PASS /* < Security Key in WPA_PSK Mode */
-#else
-#define MAIN_WLAN_AUTH           M2M_WIFI_SEC_OPEN /* < Security manner */
-#endif
-#define MAIN_WLAN_CHANNEL        (6) /* < Channel number */
+#define MAIN_WIFI_M2M_BUFFER_SIZE 1460
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
@@ -100,6 +98,8 @@ void Error_Handler(void);
 #define WIFI_INTERRUPT_GPIO_Port GPIOD
 #define WIFI_CS_Pin GPIO_PIN_14
 #define WIFI_CS_GPIO_Port GPIOD
+#define LED_RED_Pin GPIO_PIN_2
+#define LED_RED_GPIO_Port GPIOG
 #define WIFI_WAKE_Pin GPIO_PIN_6
 #define WIFI_WAKE_GPIO_Port GPIOC
 

@@ -135,4 +135,6 @@ extern SPI_HandleTypeDef hspiWifi;
 #   define CONF_WINC_PRINTF						printf
 #endif
 
+#define M2M_LOG_LEVEL M2M_LOG_DBG
+
 #endif /* CONF_WINC_H_INCLUDED */

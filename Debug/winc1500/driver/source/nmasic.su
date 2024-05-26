@@ -13,7 +13,7 @@
 ../winc1500/driver/source/nmasic.c:377:7:chip_reset_and_cpu_halt	16	static
 ../winc1500/driver/source/nmasic.c:392:7:chip_reset	16	static
 ../winc1500/driver/source/nmasic.c:400:7:wait_for_bootrom	40	static
-../winc1500/driver/source/nmasic.c:471:7:wait_for_firmware_start	40	static
+../winc1500/driver/source/nmasic.c:471:7:wait_for_firmware_start	48	static
 ../winc1500/driver/source/nmasic.c:507:7:chip_deinit	16	static
 ../winc1500/driver/source/nmasic.c:610:7:nmi_get_otp_mac_address	40	static
 ../winc1500/driver/source/nmasic.c:642:7:nmi_get_mac_address	40	static
