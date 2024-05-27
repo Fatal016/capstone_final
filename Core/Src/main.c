@@ -28,7 +28,6 @@
 #include "stm32u5xx_hal_conf.h"
 #include "driver/include/m2m_wifi.h"
 #include "socket/include/socket.h"
-//#include "bsp/include/nm_bsp_stm32u5a5.h"
 #include "config/conf_winc.h"
 /* USER CODE END Includes */
 
@@ -73,13 +72,17 @@ UART_HandleTypeDef UartHandle;
 
 
 
-typedef struct Payload_t {
-	uint8_t sensor_id;
-	uint8_t battery;
-	uint8_t distance;
+typedef struct {
+	uint16 sensor_id;
+	uint16 battery;
+	uint16 distance;
 } payload_t;
 
-static payload_t sensor_payload;
+payload_t payload = {
+  			    .sensor_id = 1,
+  			    .battery = 90,
+  			    .distance = 20
+  			  };
 
 static uint8_t socketBuffer[MAIN_WIFI_M2M_BUFFER_SIZE];
 
@@ -150,7 +153,7 @@ static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg)
             if (pstrConnect && pstrConnect->s8Error >= 0)
             {
                 printf("socket_cb: connect success!\r\n");
-                send(controller_socket, &sensor_payload, sizeof(payload_t), 0) ;
+                send(controller_socket, &payload, sizeof(payload_t), 0);
             }
             else
             {
@@ -322,6 +325,9 @@ int main(void)
 
   wifi_connected = M2M_WIFI_CONNECTED;
 
+
+
+
   while(1) {
 	  m2m_wifi_handle_events(NULL);
 
@@ -335,11 +341,14 @@ int main(void)
 			  // Connect server
 			  ret = connect(controller_socket, (struct sockaddr *)&addr, sizeof(struct sockaddr_in)) ;
 
+/*
 			  if (ret < 0)
 			  {
 				  close(controller_socket) ;
 				  controller_socket = -1 ;
 			  }
+*/
+
 		  }
 	  }
   }
