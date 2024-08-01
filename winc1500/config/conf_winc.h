@@ -59,11 +59,11 @@ extern "C" {
 /* Add extenal definition for spi handler variable, to communicate with winc1500 SPI */
 extern SPI_HandleTypeDef hspiWifi;
 
-#define CONF_WINC_PIN_RESET				    WIFI_RESET_Pin
-#define CONF_WINC_PORT_RESET				WIFI_RESET_GPIO_Port
+#define CONF_WINC_PIN_RESET				    WIFI_RST_Pin
+#define CONF_WINC_PORT_RESET				WIFI_RST_GPIO_Port
 
-#define CONF_WINC_PIN_CHIP_ENABLE		    WIFI_CHIP_ENABLE_Pin
-#define CONF_WINC_PORT_CHIP_ENABLE			WIFI_CHIP_ENABLE_GPIO_Port
+#define CONF_WINC_PIN_CHIP_ENABLE		    WIFI_EN_Pin
+#define CONF_WINC_PORT_CHIP_ENABLE			WIFI_EN_GPIO_Port
 
 #define CONF_WINC_PIN_WAKE				    WIFI_WAKE_Pin
 #define CONF_WINC_PORT_WAKE					WIFI_WAKE_GPIO_Port
@@ -114,8 +114,8 @@ extern SPI_HandleTypeDef hspiWifi;
 
 /** WiFi interrupt pin. */
 /* Add WiFi Interrupt pin: ST interrupt pin definition */
-#   define CONF_WINC_SPI_INT_PIN                WIFI_INTERRUPT_Pin
-#	define CONF_WINC_SPI_INT_PORT				WIFI_INTERRUPT_GPIO_Port
+#   define CONF_WINC_SPI_INT_PIN                WIFI_IRQ_Pin
+#	define CONF_WINC_SPI_INT_PORT				WIFI_IRQ_GPIO_Port
 #   define CONF_WINC_EXTI_IRQN                  EXTI12_IRQn
 
 /** SPI clock. */

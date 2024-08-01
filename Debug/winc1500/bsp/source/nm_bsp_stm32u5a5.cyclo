@@ -1,7 +1,0 @@
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:55:13:init_chip_pins	1
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:93:7:nm_bsp_init	1
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:109:7:nm_bsp_deinit	1
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:129:6:nm_bsp_reset	1
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:158:6:nm_bsp_sleep	1
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:170:6:nm_bsp_register_isr	1
-../winc1500/bsp/source/nm_bsp_stm32u5a5.c:214:6:nm_bsp_interrupt_ctrl	2

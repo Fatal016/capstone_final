@@ -135,8 +135,8 @@ sint8 nm_get_firmware_full_info(tstrM2mRev* pstrRev)
 								/*The current driver should be equal or less than the firmware version*/
 
 								/* Testing since firmware has been upgraded to newest version */
-								//ret = M2M_ERR_FW_VER_MISMATCH;
-								//goto EXIT;
+								ret = M2M_ERR_FW_VER_MISMATCH;
+								goto EXIT;
 							}
 						}
 					}else {

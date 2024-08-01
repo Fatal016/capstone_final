@@ -82,7 +82,7 @@ volatile tstrHifContext gstrHifCxt;
 extern void os_hook_isr(void);
 #endif
 
-static void isr(void)
+void isr(void)
 {
 	gstrHifCxt.u8Interrupt++;
 #ifdef NM_LEVEL_INTERRUPT

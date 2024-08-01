@@ -65,11 +65,11 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 /** Wi-Fi Settings */
-#define MAIN_WLAN_SSID           		"chewie-5G"
+#define MAIN_WLAN_SSID           		"chewie"
 #define MAIN_WLAN_AUTH           		M2M_WIFI_SEC_WPA_PSK
 #define MAIN_WLAN_WPA_PSK_KEY    		WIFI_PASS
 #define MAIN_WIFI_M2M_PRODUCT_NAME 		"Garage Door Sensor"
-#define MAIN_WIFI_M2M_SERVER_IP			0x44eaeff8
+#define MAIN_WIFI_M2M_SERVER_IP			0xc0a80113 /* 192.168.1.19 */
 #define MAIN_WIFI_M2M_SERVER_PORT		(4444)
 #define MAIN_WIFI_M2M_REPORT_INTERVAL	(1000)
 
@@ -96,12 +96,15 @@ void Error_Handler(void);
 #define WIFI_RESET_GPIO_Port GPIOD
 #define WIFI_INTERRUPT_Pin GPIO_PIN_12
 #define WIFI_INTERRUPT_GPIO_Port GPIOD
+#define WIFI_INTERRUPT_EXTI_IRQn EXTI12_IRQn
 #define WIFI_CS_Pin GPIO_PIN_14
 #define WIFI_CS_GPIO_Port GPIOD
 #define LED_RED_Pin GPIO_PIN_2
 #define LED_RED_GPIO_Port GPIOG
 #define WIFI_WAKE_Pin GPIO_PIN_6
 #define WIFI_WAKE_GPIO_Port GPIOC
+#define LED_BLUE_Pin GPIO_PIN_7
+#define LED_BLUE_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

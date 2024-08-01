@@ -55,8 +55,6 @@ uint32_t pInitVectAES[4] = {0x00000000,0x00000000,0x00000000,0x00000000};
 __ALIGN_BEGIN static const uint32_t HeaderAES[1] __ALIGN_END = {
                             0x00000000};
 
-I2C_HandleTypeDef hi2c1;
-
 SPI_HandleTypeDef hspi1;
 
 UART_HandleTypeDef huart4;
@@ -64,9 +62,6 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 UART_HandleTypeDef UartHandle;
-
-
-
 
 
 
@@ -100,21 +95,21 @@ static uint8_t wifi_connected;
 static void SystemClock_Config(void);
 extern void isr(void);
 
-void EXTI12_IRQHandler(void)
-{
-    uint16_t GPIO_Pin;
+//void EXTI12_IRQHandler(void)
+//{
+//    uint16_t GPIO_Pin;
+//
+//    /* Get GPIO_Pin */
+//    if (__HAL_GPIO_EXTI_GET_IT(CONF_WINC_SPI_INT_PIN))
+//    {
+//        GPIO_Pin = CONF_WINC_SPI_INT_PIN;
+//    }
+//
+//    HAL_GPIO_EXTI_IRQHandler(GPIO_Pin);
+//}
 
-    /* Get GPIO_Pin */
-    if (__HAL_GPIO_EXTI_GET_IT(CONF_WINC_SPI_INT_PIN))
-    {
-        GPIO_Pin = CONF_WINC_SPI_INT_PIN;
-    }
 
-    HAL_GPIO_EXTI_IRQHandler(GPIO_Pin);
-}
-
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
 	if(GPIO_Pin == CONF_WINC_SPI_INT_PIN)
     {
@@ -127,12 +122,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void SystemPower_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_AES_Init(void);
-static void MX_I2C1_Init(void);
-static void MX_ICACHE_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_UART4_Init(void);
 static void MX_USART1_UART_Init(void);
@@ -250,9 +242,6 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  /* Configure the System Power */
-  SystemPower_Config();
-
   /* USER CODE BEGIN SysInit */
   UartHandle.Instance        = USARTx;
 
@@ -274,8 +263,6 @@ int main(void)
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_AES_Init();
-  MX_I2C1_Init();
-  MX_ICACHE_Init();
   MX_SPI1_Init();
   MX_UART4_Init();
   MX_USART1_UART_Init();
@@ -321,11 +308,8 @@ int main(void)
 
 
 
-  //SysTick_Config(SystemCoreClock/1000);
-
-  wifi_connected = M2M_WIFI_CONNECTED;
-
-
+  SysTick_Config(SystemCoreClock/1000);
+  //wifi_connected = M2M_WIFI_CONNECTED;
 
 
   while(1) {
@@ -341,13 +325,13 @@ int main(void)
 			  // Connect server
 			  ret = connect(controller_socket, (struct sockaddr *)&addr, sizeof(struct sockaddr_in)) ;
 
-/*
+
 			  if (ret < 0)
 			  {
 				  close(controller_socket) ;
 				  controller_socket = -1 ;
 			  }
-*/
+
 
 		  }
 	  }
@@ -370,7 +354,7 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE4) != HAL_OK)
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -382,8 +366,17 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_4;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_0;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  RCC_OscInitStruct.PLL.PLLMBOOST = RCC_PLLMBOOST_DIV4;
+  RCC_OscInitStruct.PLL.PLLM = 3;
+  RCC_OscInitStruct.PLL.PLLN = 10;
+  RCC_OscInitStruct.PLL.PLLP = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 2;
+  RCC_OscInitStruct.PLL.PLLR = 1;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLLVCIRANGE_1;
+  RCC_OscInitStruct.PLL.PLLFRACN = 0;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -394,41 +387,16 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
                               |RCC_CLOCKTYPE_PCLK3;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB3CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief Power Configuration
-  * @retval None
-  */
-static void SystemPower_Config(void)
-{
-  HAL_PWREx_EnableVddIO2();
-
-  PWR_PVDTypeDef sConfigPVD = {0};
-
-  /*
-   * PVD Configuration
-   */
-  sConfigPVD.PVDLevel = PWR_PVDLEVEL_7;
-  sConfigPVD.Mode = PWR_PVD_MODE_NORMAL;
-  HAL_PWR_ConfigPVD(&sConfigPVD);
-
-  /*
-   * Enable the PVD Output
-   */
-  HAL_PWR_EnablePVD();
-/* USER CODE BEGIN PWR */
-/* USER CODE END PWR */
 }
 
 /**
@@ -527,86 +495,6 @@ static void MX_AES_Init(void)
   /* USER CODE BEGIN AES_Init 2 */
 
   /* USER CODE END AES_Init 2 */
-
-}
-
-/**
-  * @brief I2C1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_I2C1_Init(void)
-{
-
-  /* USER CODE BEGIN I2C1_Init 0 */
-
-  /* USER CODE END I2C1_Init 0 */
-
-  /* USER CODE BEGIN I2C1_Init 1 */
-
-  /* USER CODE END I2C1_Init 1 */
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x00000E14;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Analogue filter
-  */
-  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Digital filter
-  */
-  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN I2C1_Init 2 */
-
-  /* USER CODE END I2C1_Init 2 */
-
-}
-
-/**
-  * @brief ICACHE Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ICACHE_Init(void)
-{
-
-  /* USER CODE BEGIN ICACHE_Init 0 */
-
-  /* USER CODE END ICACHE_Init 0 */
-
-  /* USER CODE BEGIN ICACHE_Init 1 */
-
-  /* USER CODE END ICACHE_Init 1 */
-
-  /** Enable instruction cache in 1-way (direct mapped cache)
-  */
-  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_ICACHE_Enable() != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ICACHE_Init 2 */
-
-  /* USER CODE END ICACHE_Init 2 */
 
 }
 
@@ -775,6 +663,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -782,7 +671,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(WIFI_CHIP_ENABLE_GPIO_Port, WIFI_CHIP_ENABLE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, WIFI_CHIP_ENABLE_Pin|LED_BLUE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, WIFI_RESET_Pin|WIFI_CS_Pin, GPIO_PIN_RESET);
@@ -793,12 +682,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(WIFI_WAKE_GPIO_Port, WIFI_WAKE_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : WIFI_CHIP_ENABLE_Pin */
-  GPIO_InitStruct.Pin = WIFI_CHIP_ENABLE_Pin;
+  /*Configure GPIO pins : WIFI_CHIP_ENABLE_Pin LED_BLUE_Pin */
+  GPIO_InitStruct.Pin = WIFI_CHIP_ENABLE_Pin|LED_BLUE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(WIFI_CHIP_ENABLE_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : WIFI_RESET_Pin WIFI_CS_Pin */
   GPIO_InitStruct.Pin = WIFI_RESET_Pin|WIFI_CS_Pin;
@@ -809,7 +698,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : WIFI_INTERRUPT_Pin */
   GPIO_InitStruct.Pin = WIFI_INTERRUPT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(WIFI_INTERRUPT_GPIO_Port, &GPIO_InitStruct);
 
@@ -827,11 +716,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(WIFI_WAKE_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI12_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI12_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

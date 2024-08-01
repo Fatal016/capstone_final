@@ -243,6 +243,8 @@ NMI_API void hif_yield(void);
 */
 NMI_API sint8 hif_handle_isr(void);
 
+void isr(void);
+
 #ifdef __cplusplus
 }
 #endif

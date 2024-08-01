@@ -96,12 +96,15 @@ void Error_Handler(void);
 #define WIFI_RESET_GPIO_Port GPIOD
 #define WIFI_INTERRUPT_Pin GPIO_PIN_12
 #define WIFI_INTERRUPT_GPIO_Port GPIOD
+#define WIFI_INTERRUPT_EXTI_IRQn EXTI12_IRQn
 #define WIFI_CS_Pin GPIO_PIN_14
 #define WIFI_CS_GPIO_Port GPIOD
 #define LED_RED_Pin GPIO_PIN_2
 #define LED_RED_GPIO_Port GPIOG
 #define WIFI_WAKE_Pin GPIO_PIN_6
 #define WIFI_WAKE_GPIO_Port GPIOC
+#define LED_BLUE_Pin GPIO_PIN_7
+#define LED_BLUE_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

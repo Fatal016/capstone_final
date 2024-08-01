@@ -1,4 +1,4 @@
-../winc1500/driver/source/m2m_hif.c:85:13:isr	4	static
+../winc1500/driver/source/m2m_hif.c:85:6:isr	4	static
 ../winc1500/driver/source/m2m_hif.c:95:14:hif_set_rx_done	16	static
 ../winc1500/driver/source/m2m_hif.c:131:13:m2m_hif_cb	16	static
 ../winc1500/driver/source/m2m_hif.c:142:7:hif_chip_wake	16	static
