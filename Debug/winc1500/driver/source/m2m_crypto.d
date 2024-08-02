@@ -1,12 +1,12 @@
 winc1500/driver/source/m2m_crypto.o: \
  ../winc1500/driver/source/m2m_crypto.c \
- /home/couriersix/Git/capstone_final/winc1500/driver/include/m2m_crypto.h \
- /home/couriersix/Git/capstone_final/winc1500/common/include/nm_common.h \
- /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp.h \
- /home/couriersix/Git/capstone_final/winc1500/common/include/nm_debug.h \
- /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h \
- /home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_stm32u5a5.h \
- /home/couriersix/Git/capstone_final/winc1500/config/conf_winc.h \
+ C:/Users/016er/Git/capstone_final/winc1500/driver/include/m2m_crypto.h \
+ C:/Users/016er/Git/capstone_final/winc1500/common/include/nm_common.h \
+ C:/Users/016er/Git/capstone_final/winc1500/bsp/include/nm_bsp.h \
+ C:/Users/016er/Git/capstone_final/winc1500/common/include/nm_debug.h \
+ C:/Users/016er/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h \
+ C:/Users/016er/Git/capstone_final/winc1500/bsp/include/nm_bsp_stm32u5a5.h \
+ C:/Users/016er/Git/capstone_final/winc1500/config/conf_winc.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h \
  ../Core/Inc/stm32u5xx_hal_conf.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_rcc.h \
@@ -23,6 +23,7 @@ winc1500/driver/source/m2m_crypto.o: \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_rcc_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_gpio.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_gpio_ex.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_icache.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cortex.h \
@@ -33,26 +34,30 @@ winc1500/driver/source/m2m_crypto.o: \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cryp_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash_ex.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_spi.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_spi_ex.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_uart.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_uart_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_exti.h \
  ../Core/Inc/main.h ../Core/Inc/secrets.h \
- /home/couriersix/Git/capstone_final/winc1500/driver/include/m2m_types.h \
- /home/couriersix/Git/capstone_final/winc1500/driver/source/m2m_hif.h \
- /home/couriersix/Git/capstone_final/winc1500/driver/source/nmbus.h \
- /home/couriersix/Git/capstone_final/winc1500/bus_wrapper/include/nm_bus_wrapper.h \
- /home/couriersix/Git/capstone_final/winc1500/driver/source/nmasic.h
-/home/couriersix/Git/capstone_final/winc1500/driver/include/m2m_crypto.h:
-/home/couriersix/Git/capstone_final/winc1500/common/include/nm_common.h:
-/home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp.h:
-/home/couriersix/Git/capstone_final/winc1500/common/include/nm_debug.h:
-/home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h:
-/home/couriersix/Git/capstone_final/winc1500/bsp/include/nm_bsp_stm32u5a5.h:
-/home/couriersix/Git/capstone_final/winc1500/config/conf_winc.h:
+ C:/Users/016er/Git/capstone_final/winc1500/driver/include/m2m_types.h \
+ C:/Users/016er/Git/capstone_final/winc1500/driver/source/m2m_hif.h \
+ C:/Users/016er/Git/capstone_final/winc1500/driver/source/nmbus.h \
+ C:/Users/016er/Git/capstone_final/winc1500/bus_wrapper/include/nm_bus_wrapper.h \
+ C:/Users/016er/Git/capstone_final/winc1500/driver/source/nmasic.h
+C:/Users/016er/Git/capstone_final/winc1500/driver/include/m2m_crypto.h:
+C:/Users/016er/Git/capstone_final/winc1500/common/include/nm_common.h:
+C:/Users/016er/Git/capstone_final/winc1500/bsp/include/nm_bsp.h:
+C:/Users/016er/Git/capstone_final/winc1500/common/include/nm_debug.h:
+C:/Users/016er/Git/capstone_final/winc1500/bsp/include/nm_bsp_internal.h:
+C:/Users/016er/Git/capstone_final/winc1500/bsp/include/nm_bsp_stm32u5a5.h:
+C:/Users/016er/Git/capstone_final/winc1500/config/conf_winc.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h:
 ../Core/Inc/stm32u5xx_hal_conf.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_rcc.h:
@@ -69,6 +74,7 @@ winc1500/driver/source/m2m_crypto.o: \
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_rcc_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_gpio.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_gpio_ex.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_icache.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cortex.h:
@@ -79,17 +85,21 @@ winc1500/driver/source/m2m_crypto.o: \
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cryp_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash_ex.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_spi.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_spi_ex.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_uart.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_uart_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_exti.h:
 ../Core/Inc/main.h:
 ../Core/Inc/secrets.h:
-/home/couriersix/Git/capstone_final/winc1500/driver/include/m2m_types.h:
-/home/couriersix/Git/capstone_final/winc1500/driver/source/m2m_hif.h:
-/home/couriersix/Git/capstone_final/winc1500/driver/source/nmbus.h:
-/home/couriersix/Git/capstone_final/winc1500/bus_wrapper/include/nm_bus_wrapper.h:
-/home/couriersix/Git/capstone_final/winc1500/driver/source/nmasic.h:
+C:/Users/016er/Git/capstone_final/winc1500/driver/include/m2m_types.h:
+C:/Users/016er/Git/capstone_final/winc1500/driver/source/m2m_hif.h:
+C:/Users/016er/Git/capstone_final/winc1500/driver/source/nmbus.h:
+C:/Users/016er/Git/capstone_final/winc1500/bus_wrapper/include/nm_bus_wrapper.h:
+C:/Users/016er/Git/capstone_final/winc1500/driver/source/nmasic.h:

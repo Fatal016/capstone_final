@@ -67,8 +67,8 @@ all: main-build
 main-build: capstone_final.elf secondary-outputs
 
 # Tool invocations
-capstone_final.elf capstone_final.map: $(OBJS) $(USER_OBJS) /home/couriersix/Git/capstone_final/STM32U5A5ZJTXQ_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "capstone_final.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"/home/couriersix/Git/capstone_final/STM32U5A5ZJTXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="capstone_final.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+capstone_final.elf capstone_final.map: $(OBJS) $(USER_OBJS) C:\Users\016er\Git\capstone_final\STM32U5A5ZJTXQ_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "capstone_final.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"C:\Users\016er\Git\capstone_final\STM32U5A5ZJTXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="capstone_final.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
