@@ -116,7 +116,7 @@ extern SPI_HandleTypeDef hspiWifi;
 /* Add WiFi Interrupt pin: ST interrupt pin definition */
 #   define CONF_WINC_SPI_INT_PIN                WIFI_IRQ_Pin
 #	define CONF_WINC_SPI_INT_PORT				WIFI_IRQ_GPIO_Port
-#   define CONF_WINC_EXTI_IRQN                  EXTI12_IRQn
+#   define CONF_WINC_EXTI_IRQN                  EXTI8_IRQn
 
 /** SPI clock. */
 #define CONF_WINC_SPI_CLOCK				        (16000000)

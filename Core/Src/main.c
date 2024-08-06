@@ -89,6 +89,9 @@ static SOCKET controller_socket = -1;
 
 static uint8_t wifi_connected;
 
+static uint32_t Distance;
+
+
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
    set to 'Yes') calls __io_putchar() */
@@ -229,31 +232,36 @@ void delay_us (uint16_t us)
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);
 }
 
-uint32_t Distance;
+
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	static uint32_t returnSignal = 0;
 	static uint32_t begin_timestamp = 0;
 	static uint32_t end_timestamp = 0;
-	uint32_t Difference = 0;
 
-	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)  // if the interrupt source is channel1
+	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
 	{
 		if (returnSignal) {
 			returnSignal = 0;
-
 			begin_timestamp = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+
+			/* switching capture signal to falling edge */
 			__HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_FALLING);
 		} else {
 			returnSignal = 1;
+			end_timestamp = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
 
-			end_timestamp = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
-			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
-			Difference = end_timestamp-begin_timestamp;
+			/* Resetting timer */
+			__HAL_TIM_SET_COUNTER(htim, 0);
 
-			Distance = Difference * .034/2;
+			/* from documentation: range = high level time * velocity (340M/S) / 2 -> m/s */
+			/* doing cm/us here instead as time is captured in us, not s */
+			Distance = (end_timestamp - begin_timestamp) * .034/2;
 
+			/* switching capture signal to rising edge */
 			__HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_RISING);
+
+			/* Resetting interrupt */
 			__HAL_TIM_DISABLE_IT(&htim1, TIM_IT_CC1);
 		}
 	}
@@ -261,12 +269,16 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 
 
 
-void HCSR04_Read (void)
+void read_distance (void)
 {
 	HAL_GPIO_WritePin(DIST_TRIG_GPIO_Port, DIST_TRIG_Pin, GPIO_PIN_SET);  // pull the TRIG pin HIGH
-	delay_us(10);  // wait for 10 us
+
+	/* delay 10us in accordance with HS - SR04 documentation */
+	delay_us(10);
+
 	HAL_GPIO_WritePin(DIST_TRIG_GPIO_Port, DIST_TRIG_Pin, GPIO_PIN_RESET);  // pull the TRIG pin low
 
+	/* Enable interrupt */
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
 }
 
@@ -282,7 +294,6 @@ void HCSR04_Read (void)
   */
 int main(void)
 {
-
   /* USER CODE BEGIN 1 */
   tstrWifiInitParam param;
   int8_t ret;
@@ -295,7 +306,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  printf("Initializing...\n");
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -335,9 +346,12 @@ int main(void)
   __GPIOA_CLK_ENABLE();
   __GPIOB_CLK_ENABLE();
 
+  printf("Initializing...\n");
+
   ret = HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
   if (ret != HAL_OK) {
 	printf("Error setting mode for distance sensor.\n");
+	while (1) {}
   }
 
   /* Initialize the BSP. */
@@ -359,11 +373,11 @@ int main(void)
 
   /* Initialize Wi-Fi driver with data and status callbacks. */
   param.pfAppWifiCb = wifi_cb;
-//  ret = m2m_wifi_init(&param);
-//  if (M2M_SUCCESS != ret) {
-//      printf("main: m2m_wifi_init call error!(%d)\r\n", ret);
-//    	while (1) {}
-//  }
+  ret = m2m_wifi_init(&param);
+  if (M2M_SUCCESS != ret) {
+      printf("main: m2m_wifi_init call error!(%d)\r\n", ret);
+      while (1) {}
+  }
 /*
   socketInit();
   registerSocketCallback(socket_cb, NULL);
@@ -380,9 +394,9 @@ int main(void)
 */
 
   while(1) {
-	  HCSR04_Read();
-	  HAL_Delay(400);
-	  printf("Dist: %ldcm\n", Distance);
+	  //read_distance();
+	  //HAL_Delay(400);
+	  //printf("Dist: %ldcm\n", Distance);
 	  /*
 	  m2m_wifi_handle_events(NULL);
 
